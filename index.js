@@ -206,8 +206,9 @@ if(argv.r){
             return console.error("Output file location is required");
         }
         const outputFile = path.resolve(relativeOutputFile);
-        
-        json = applyLogic(json, requires)
+        for(let r of requires) {
+            json = applyLogic(json, r.apiList)
+        }
         
         fs.outputFile(outputFile, JSON.stringify(json, null, 4), function(err){
             if(err) {
