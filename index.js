@@ -92,10 +92,7 @@ function applyLogic(json, apiList){
                 parameters.push({
                     name: "body",
                     in: "body",
-                    schema: {
-                        swagger
-                    }
-                    // schema: swagger
+                    schema: swagger
                 });
             }
             if(currentValue.JoiSchema.path){
