@@ -30,11 +30,13 @@ const validatorFile = path.resolve(relativeValidatorPath);
 
 function applyLogic(json, apiList){
     const basePath = json.basePath;
-    json.info.title = json.info.title + " " + process.env.NODE_ENV;
-    json.info.description = json.info.description + " for " + process.env.NODE_ENV + " environment";
+    // json.info.title = json.info.title + " " + process.env.NODE_ENV;
+    // json.info.description = json.info.description + " for " + process.env.NODE_ENV + " environment";
+    json.info.title = json.info.title;
+    json.info.description = json.info.description;
 
     json.paths = {};
-    json.definitions = {};
+    // json.definitions = {};
     for(key in apiList) {
         const mapHeader = {};
         const requestMap = {};
@@ -85,13 +87,13 @@ function applyLogic(json, apiList){
             if(currentValue.JoiSchema.body){
                 const {swagger} = j2s(currentValue.JoiSchema.body);
         
-                const modelName = `${currentValue.enname.replace(/\s/g, "")}${currentValue.type.capitalize()}Body`;
-                json.definitions[modelName] = swagger;
+                // const modelName = `${currentValue.name.replace(/\s/g, "")}${currentValue.type.capitalize()}Body`;
+                // json.definitions[modelName] = swagger;
                 parameters.push({
                     name: "body",
                     in: "body",
                     schema: {
-                        $ref: `#/definitions/${modelName}`
+                        swagger
                     }
                     // schema: swagger
                 });
@@ -125,14 +127,11 @@ function applyLogic(json, apiList){
                 const {swagger} = j2s(currentValue.JoiSchema.response);
     
                 for(statusCode in swagger.properties) {
-                    const modelName = `${currentValue.enname.replace(/\s/g, "")}${currentValue.type.capitalize()}${statusCode}Response`;
-                    json.definitions[modelName] = swagger.properties[statusCode].properties.body;
-    
+                    // const modelName = `${currentValue.name.replace(/\s/g, "")}${currentValue.type.capitalize()}${statusCode}Response`;
+                    // json.definitions[modelName] = swagger.properties[statusCode].properties.body;
                     const data = {
                         description: swagger.properties[statusCode].properties.description.enum[0],
-                        schema: {
-                            $ref: `#/definitions/${modelName}`
-                        },
+                        schema: swagger.properties[statusCode].properties.body,
                     };
     
                     if(swagger.properties[statusCode].properties.header){
