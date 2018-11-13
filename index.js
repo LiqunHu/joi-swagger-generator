@@ -85,7 +85,7 @@ function applyLogic(json, apiList){
             if(currentValue.JoiSchema.body){
                 const {swagger} = j2s(currentValue.JoiSchema.body);
         
-                const modelName = `${currentValue.name.replace(/\s/g, "")}${currentValue.type.capitalize()}Body`;
+                const modelName = `${currentValue.enname.replace(/\s/g, "")}${currentValue.type.capitalize()}Body`;
                 json.definitions[modelName] = swagger;
                 parameters.push({
                     name: "body",
@@ -125,7 +125,7 @@ function applyLogic(json, apiList){
                 const {swagger} = j2s(currentValue.JoiSchema.response);
     
                 for(statusCode in swagger.properties) {
-                    const modelName = `${currentValue.name.replace(/\s/g, "")}${currentValue.type.capitalize()}${statusCode}Response`;
+                    const modelName = `${currentValue.enname.replace(/\s/g, "")}${currentValue.type.capitalize()}${statusCode}Response`;
                     json.definitions[modelName] = swagger.properties[statusCode].properties.body;
     
                     const data = {
