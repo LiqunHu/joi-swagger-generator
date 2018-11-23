@@ -32,17 +32,17 @@ function applyLogic(json, apiList) {
   json.info.title = json.info.title
   json.info.description = json.info.description
 
-  json.paths = {}
-  json.components = {
-    securitySchemes: {
-      ApiKeyAuth: {
-        type: 'apiKey',
-        in: 'header',
-        name: 'Authorization'
-      }
-    },
-    schemas: {}
-  }
+  // json.paths = {}
+  // json.components = {
+  //   securitySchemes: {
+  //     ApiKeyAuth: {
+  //       type: 'apiKey',
+  //       in: 'header',
+  //       name: 'Authorization'
+  //     }
+  //   },
+  //   schemas: {}
+  // }
   for (key in apiList) {
     const mapHeader = {}
     const requestMap = {}
