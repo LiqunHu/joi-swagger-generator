@@ -236,8 +236,10 @@ if (argv.r) {
     fs.outputFile(outputFile, JSON.stringify(json, null, 4), function(err) {
       if (err) {
         console.error(err)
+        process.exit(1)
       } else {
         console.log('successfully write swagger file to ' + outputFile)
+        process.exit(0)
       }
     })
   })
@@ -277,8 +279,10 @@ if (argv.r) {
   fs.outputFile(outputFile, JSON.stringify(json, null, 4), function(err) {
     if (err) {
       console.error(err)
+      process.exit(1)
     } else {
       console.log('successfully write swagger file to ' + outputFile)
+      process.exit(0)
     }
   })
 }
